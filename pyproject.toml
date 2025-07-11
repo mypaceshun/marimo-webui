@@ -1,0 +1,35 @@
+[project]
+name = "marimo-webui"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "KAWAI Shun",email = "shun@osstech.co.jp"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask (>=3.1.1,<4.0.0)"
+]
+
+[tool.poetry]
+packages = [
+  { include = "marimo_webui", from = "src" }
+]
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+mypy = "^1.16.1"
+isort = "^6.0.1"
+
+[tool.poe.tasks.format]
+sequence = [
+  { cmd = "black --line-length 88 src/" },
+  { cmd = "isort --profile black src/" },
+]
+
+[tool.poe.tasks.run]
+cmd = "flask --app marimo_webui.server run --host shun4.lan.osstech.co.jp"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
