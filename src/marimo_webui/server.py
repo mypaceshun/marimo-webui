@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
+from marimo_webui.tempreture import getTempreture
 
+app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    tempreture = getTempreture()
+    return render_template("index.html", tempreture=tempreture)
